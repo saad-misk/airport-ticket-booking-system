@@ -13,19 +13,23 @@ namespace AirportTicketBookingSystem.Helpers
         public List<string> ValidateFlight(List<Flight> flights)
         {
             var errors = new List<string>();
-
+            int cnt = 0;
             foreach (var flight in flights)
             {
                 var validationResults = new List<ValidationResult>();
                 var context = new ValidationContext(flight);
 
-                if( !Validator.TryValidateObject(flight, context, validationResults))
+                cnt++;
+                if( !Validator.TryValidateObject(flight, context, validationResults, true))
                 {
                     foreach (var validationResult in validationResults)
                     {
-                        errors.Add($"Flight {flight.FlightNumber}: {validationResult.ErrorMessage}");
+
+                        errors.Add($"Flight({cnt}) {flight.FlightNumber}: {validationResult.ErrorMessage}");
                     }
+                    Console.WriteLine("hhhhhhhhhhhhhheeeeeeeeeeeeeeeeeeeeeeeyyyyyyyyyyyyyyyy");
                 }
+                Console.WriteLine(flight.FlightNumber);
             }
 
             return errors;
