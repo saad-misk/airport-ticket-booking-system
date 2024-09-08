@@ -19,7 +19,9 @@ namespace AirportTicketBookingSystem.Views
 
         public void Execute()
         {
-            Console.WriteLine(".. CancelBooking ...");
+            var promptUser = new PromptUser();
+            var bookingId = promptUser.PromptForString("Enter Booking ID to Cancel: ");
+            _bookingService.CancelBooking(bookingId);
         }
     }
 }

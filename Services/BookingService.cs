@@ -39,6 +39,10 @@ namespace AirportTicketBookingSystem.Services
             {
                 Console.WriteLine($"No booking found with ID: {bookingId}");
             }
+            else
+            {
+                Console.WriteLine("Done! Booking was removed.");
+            }
 
             SaveBookings(bookings);
         }
@@ -71,10 +75,7 @@ namespace AirportTicketBookingSystem.Services
 
         private void SaveBookings(List<Booking> bookingsList)
         {
-            var bookings = LoadBookings();
-            bookings.Concat(bookingsList);
-
-            string updatedJson = JsonConvert.SerializeObject(bookings, Formatting.Indented);
+            string updatedJson = JsonConvert.SerializeObject(bookingsList, Formatting.Indented);
 
             File.WriteAllText(bookingFilePath, updatedJson);
 
