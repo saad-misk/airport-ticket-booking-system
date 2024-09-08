@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AirportTicketBookingSystem.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace AirportTicketBookingSystem.Models
 
         [Required(ErrorMessage = "Departure date is required.")]
         [DataType(DataType.Date, ErrorMessage = "Invalid date format.")]
-        [Range(typeof(DateTime), "2024-01-01", "2024-12-31", ErrorMessage = "Departure date must be within the year 2024.")]
+        [DateRange(-30, 100, ErrorMessage = "Booking date must be between 1 day and 30 days from today.")]
         public DateTime? DepartureDate { get; set; }
 
         [Required(ErrorMessage = "Departure airport is required.")]
