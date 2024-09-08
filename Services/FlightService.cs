@@ -35,5 +35,18 @@ namespace AirportTicketBookingSystem.Services
             return JsonConvert.DeserializeObject<List<Flight>>(json) ?? new List<Flight>();
         }
 
+        public void AddFlight(Flight flight)
+        {
+            List<Flight> flights = LoadFlights();
+            flights.Add(flight);
+            SaveFlights(flights);
+        }
+
+        private void SaveFlights(List<Flight> flights)
+        {
+            string updatedJson = JsonConvert.SerializeObject(flights, Formatting.Indented);
+            File.WriteAllText(flightFilePath, updatedJson);
+        }
+
     }
 }
