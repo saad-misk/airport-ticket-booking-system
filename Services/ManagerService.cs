@@ -1,4 +1,5 @@
-﻿using AirportTicketBookingSystem.Models;
+﻿using AirportTicketBookingSystem.Helpers;
+using AirportTicketBookingSystem.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,8 @@ namespace AirportTicketBookingSystem.Services
 
     public class ManagerService
     {
-        private string flightFilePath = "Data/flights.json";
-        private string bookingFilePath = "Data/bookings.json";
+        private string flightFilePath = $"{AppDomain.CurrentDomain.BaseDirectory}../../../Data/flights.json";
+        private string bookingFilePath = $"{AppDomain.CurrentDomain.BaseDirectory}../../../Data/bookings.json";
 
         public List<Booking> FilterBookings(FilterCriteria criteria)
         {
@@ -31,6 +32,24 @@ namespace AirportTicketBookingSystem.Services
             ).ToList();
         }
 
+        public List<string> Validate()
+        {
+            var flights = LoadFlights();
+
+            FlightValidator fv = new FlightValidator();
+            List<string> result = fv.ValidateFlight(flights);
+
+            return result;
+        }
+
+        public void ValidateReport()
+        {
+            var txt = Validate();
+            foreach(var t in txt)
+            {
+                Console.WriteLine(t);
+            }
+        }
         public void BatchUploadFlights()
         {
             Console.WriteLine("hello");

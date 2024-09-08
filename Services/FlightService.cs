@@ -10,7 +10,7 @@ namespace AirportTicketBookingSystem.Services
 {
     public class FlightService
     {
-        public string flightFilePath = "Data/flights.json";
+        public string flightFilePath = ".$\"{AppDomain.CurrentDomain.BaseDirectory}../../../Data/flights.json\";
 
         public List<Flight> GetAvailableFlights(Flight criteria)
         {
