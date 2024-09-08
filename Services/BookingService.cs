@@ -10,8 +10,8 @@ namespace AirportTicketBookingSystem.Services
 {
     public class BookingService
     {
-        private string bookingFilePath = "bookings.json";
-        private string passengerFilePath = "passengers.json";
+        private string bookingFilePath = "Data/bookings.json";
+        private string passengerFilePath = "Data/passengers.json";
 
         public void BookFlight(string passengerId, string flightNumber, string flightClass)
         {

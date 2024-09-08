@@ -11,8 +11,8 @@ namespace AirportTicketBookingSystem.Services
 
     public class ManagerService
     {
-        private string flightFilePath = "flights.json";
-        private string bookingFilePath = "bookings.json";
+        private string flightFilePath = "Data/flights.json";
+        private string bookingFilePath = "Data/bookings.json";
 
         public List<Booking> FilterBookings(FilterCriteria criteria)
         {
