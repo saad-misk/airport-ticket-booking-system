@@ -25,7 +25,7 @@ namespace AirportTicketBookingSystem.Views
         {
             return choice switch
             {
-                "1" => new BookFlightCommand(_bookingService),
+                "1" => new BookFlightCommand(_bookingService, _flightService),
                 "2" => new ViewBookingsCommand(_bookingService),
                 "3" => new CancelBookingCommand(_bookingService),
                 "4" => new ModifyBookingCommand(_bookingService),
