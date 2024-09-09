@@ -24,12 +24,12 @@ namespace AirportTicketBookingSystem.Views
             var promptUser = new PromptUser();
             Console.WriteLine("Enter Booking Information:");
 
-            var passengerId = promptUser.PromptForString("Passenger ID: ");
-            var flightNumber = promptUser.PromptForString("Flight Number: ");
+            var passengerId = promptUser.PromptForString("Passenger ID: ") ?? "N/A";
+            var flightNumber = promptUser.PromptForString("Flight Number: ") ?? "N/A";
 
             var flightCriteria = new Flight
             {
-                FlightNumber = flightNumber,
+                FlightNumber = flightNumber
             };
             var availableFlights = _flightService.GetAvailableFlights(flightCriteria);
             if( availableFlights.Any())
