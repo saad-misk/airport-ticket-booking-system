@@ -19,7 +19,7 @@ namespace AirportTicketBookingSystem.Views
 
         public void Execute()
         {
-            Console.WriteLine("... Validate Flights ...");
+            _managerService.ValidateReport();
         }
     }
 }

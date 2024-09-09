@@ -27,9 +27,7 @@ namespace AirportTicketBookingSystem.Helpers
 
                         errors.Add($"Flight({cnt}) {flight.FlightNumber}: {validationResult.ErrorMessage}");
                     }
-                    Console.WriteLine("hhhhhhhhhhhhhheeeeeeeeeeeeeeeeeeeeeeeyyyyyyyyyyyyyyyy");
                 }
-                Console.WriteLine(flight.FlightNumber);
             }
 
             return errors;

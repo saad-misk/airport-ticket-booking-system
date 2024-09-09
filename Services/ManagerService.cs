@@ -53,6 +53,10 @@ namespace AirportTicketBookingSystem.Services
             {
                 Console.WriteLine(t);
             }
+            if(txt.Count == 0)
+            {
+                Console.WriteLine("All Flights are valid");
+            }
         }
         public void BatchUploadFlights()
         {
