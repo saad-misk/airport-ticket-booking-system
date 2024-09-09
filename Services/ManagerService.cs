@@ -18,18 +18,22 @@ namespace AirportTicketBookingSystem.Services
         public List<Booking> FilterBookings(FilterCriteria criteria)
         {
             var bookings = LoadBookings();
+
             return bookings.Where(b =>
-                (criteria.FlightNumber == null || b.FlightNumber == criteria.FlightNumber) &&
-                (criteria.Price == null || GetFlightPrice(b.FlightNumber, b.Class) == criteria.Price) &&
-                (criteria.DepartureCountry == null || GetFlight(b.FlightNumber).DepartureCountry == criteria.DepartureCountry) &&
-                (criteria.DestinationCountry == null || GetFlight(b.FlightNumber).DestinationCountry == criteria.DestinationCountry) &&
-                (criteria.DepartureDate == null || (GetFlight(b.FlightNumber)?.DepartureDate.HasValue == true &&
-                 GetFlight(b.FlightNumber)?.DepartureDate.Value.Date == criteria.DepartureDate.Value.Date)  ) && 
-                (criteria.DepartureAirport == null || GetFlight(b.FlightNumber).DepartureAirport == criteria.DepartureAirport) &&
-                (criteria.ArrivalAirport == null || GetFlight(b.FlightNumber).ArrivalAirport == criteria.ArrivalAirport) &&
-                (criteria.Passenger == null || b.PassengerId == criteria.Passenger) &&
-                (criteria.Class == null || b.Class == criteria.Class)
-            ).ToList();
+            {
+                var flight = GetFlight(b.FlightNumber);
+                var flightPrice = flight != null ? GetFlightPrice(b.FlightNumber, b.Class) : (decimal?)null;                
+                return
+                    (criteria.FlightNumber == null || b.FlightNumber == criteria.FlightNumber) &&
+                    (criteria.Price == null || flightPrice == criteria.Price) &&
+                    (criteria.DepartureCountry == null || (flight != null && flight.DepartureCountry == criteria.DepartureCountry)) &&
+                    (criteria.DestinationCountry == null || (flight != null && flight.DestinationCountry == criteria.DestinationCountry)) &&
+                    (criteria.DepartureDate == null || (flight != null && flight.DepartureDate.HasValue && flight.DepartureDate.Value.Date == criteria.DepartureDate.Value.Date)) &&
+                    (criteria.DepartureAirport == null || (flight != null && flight.DepartureAirport == criteria.DepartureAirport)) &&
+                    (criteria.ArrivalAirport == null || (flight != null && flight.ArrivalAirport == criteria.ArrivalAirport)) &&
+                    (criteria.Passenger == null || b.PassengerId == criteria.Passenger) &&
+                    (criteria.Class == null || b.Class == criteria.Class);
+            }).ToList();
         }
 
         public List<string> Validate()
@@ -92,7 +96,7 @@ namespace AirportTicketBookingSystem.Services
             return JsonConvert.DeserializeObject<List<Flight>>(json) ?? new List<Flight>();
         }
 
-        private decimal GetFlightPrice(string flightNumber, string flightClass)
+        public decimal GetFlightPrice(string flightNumber, string flightClass)
         {
             var flight = GetFlight(flightNumber);
             return flight.ClassPrices.ContainsKey(flightClass) ? flight.ClassPrices[flightClass] : 0;
