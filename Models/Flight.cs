@@ -34,5 +34,19 @@ namespace AirportTicketBookingSystem.Models
         [Required(ErrorMessage = "Class prices are required.")]
         public Dictionary<string, decimal> ClassPrices { get; set; } // Key: Class Name, Value: Price
 
+        public override string ToString()
+        {
+            var classPricesFormatted = string.Join(", ", ClassPrices.Select(cp => $"{cp.Key}: {cp.Value:C}"));
+            var departureDateFormatted = DepartureDate.HasValue ? DepartureDate.Value.ToString("yyyy-MM-dd") : "N/A";
+
+            return $"Flight Number: {FlightNumber}, " +
+                   $"Departure Country: {DepartureCountry}, " +
+                   $"Destination Country: {DestinationCountry}, " +
+                   $"Departure Date: {departureDateFormatted}, " +
+                   $"Departure Airport: {DepartureAirport}, " +
+                   $"Arrival Airport: {ArrivalAirport}, " +
+                   $"Class Prices: [{classPricesFormatted}]";
+        }
+
     }
 }
