@@ -14,5 +14,13 @@ namespace AirportTicketBookingSystem.Models
         public string Class { get; set; }
         public DateTime BookingDate { get; set; }
 
+        public override string ToString()
+        {
+            return $"Booking ID: {BookingId ?? "N/A"}, " +
+                   $"Flight Number: {FlightNumber ?? "N/A"}, " +
+                   $"Passenger ID: {PassengerId ?? "N/A"}, " +
+                   $"Class: {Class ?? "N/A"}, " +
+                   $"Booking Date: {BookingDate:yyyy-MM-dd}";
+        }
     }
 }

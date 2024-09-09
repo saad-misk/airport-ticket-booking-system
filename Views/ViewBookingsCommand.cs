@@ -19,7 +19,17 @@ namespace AirportTicketBookingSystem.Views
 
         public void Execute()
         {
-            Console.WriteLine("... ViewBooking ...");
+            PromptUser promptUser = new PromptUser();
+            string passengerId = promptUser.PromptForString("Enter Passenger ID: ");
+            var bookings = _bookingService.GetPersonalBookings(passengerId);
+            foreach(var booking in bookings)
+            {
+                Console.WriteLine(booking.ToString());
+            }
+            if(bookings.Count == 0)
+            {
+                Console.WriteLine($"There are no bookings for passenger with id: {passengerId}");
+            }
         }
     }
 }
