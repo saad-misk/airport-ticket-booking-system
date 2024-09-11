@@ -12,9 +12,14 @@ namespace AirportTicketBookingSystem.Services
 
     public class ManagerService
     {
+        private readonly FileService _fileService;
         private string flightFilePath = $"{AppDomain.CurrentDomain.BaseDirectory}../../../Data/flights.json";
         private string bookingFilePath = $"{AppDomain.CurrentDomain.BaseDirectory}../../../Data/bookings.json";
 
+        public ManagerService()
+        {
+            _fileService = new FileService();
+        }
         public List<Booking> FilterBookings(FilterCriteria criteria)
         {
             var bookings = LoadBookings();
@@ -58,19 +63,13 @@ namespace AirportTicketBookingSystem.Services
                 Console.WriteLine("All Flights are valid");
             }
         }
-        public void BatchUploadFlights()
-        {
-            Console.WriteLine("hello");
-        }
 
         private void SaveFlight(Flight flight)
         {
             var flights = LoadFlights();
             flights.Add(flight);
 
-            string updatedJson = JsonConvert.SerializeObject(flights, Formatting.Indented);
-
-            File.WriteAllText(bookingFilePath, updatedJson);
+            _fileService.SaveToFile(flightFilePath, flights);
         }
 
         private Flight GetFlight(string flightNumber)
@@ -81,23 +80,12 @@ namespace AirportTicketBookingSystem.Services
 
         private List<Booking> LoadBookings()
         {
-            if (!File.Exists(bookingFilePath))
-            {
-                throw new FileNotFoundException($"File not found: {bookingFilePath}");
-            }
-            string json = File.ReadAllText(bookingFilePath);
-            return JsonConvert.DeserializeObject<List<Booking>>(json) ?? new List<Booking>();
-
+            return _fileService.LoadFromFile<Booking>(bookingFilePath);
         }
 
         private List<Flight> LoadFlights()
         {
-            if (!File.Exists(flightFilePath))
-            {
-                throw new FileNotFoundException($"File not found: {flightFilePath}");
-            }
-            string json = File.ReadAllText(flightFilePath);
-            return JsonConvert.DeserializeObject<List<Flight>>(json) ?? new List<Flight>();
+            return _fileService.LoadFromFile<Flight>(flightFilePath);
         }
 
         public decimal GetFlightPrice(string flightNumber, string flightClass)

@@ -10,8 +10,13 @@ namespace AirportTicketBookingSystem.Services
 {
     public class FlightService
     {
+        private readonly FileService _fileService;
         public string flightFilePath = $"{AppDomain.CurrentDomain.BaseDirectory}../../../Data/flights.json";
 
+        public FlightService()
+        {
+            _fileService = new FileService();
+        }
         public List<Flight> GetAvailableFlights(Flight criteria)
         {
             var flights = LoadFlights();
@@ -27,12 +32,7 @@ namespace AirportTicketBookingSystem.Services
         }
         private List<Flight> LoadFlights()
         {
-            if (!File.Exists(flightFilePath))
-            {
-                throw new FileNotFoundException($"File not found: {flightFilePath}");
-            }
-            string json = File.ReadAllText(flightFilePath);
-            return JsonConvert.DeserializeObject<List<Flight>>(json) ?? new List<Flight>();
+            return _fileService.LoadFromFile<Flight>(flightFilePath);
         }
 
         public void AddFlight(Flight flight)
@@ -44,8 +44,7 @@ namespace AirportTicketBookingSystem.Services
 
         private void SaveFlights(List<Flight> flights)
         {
-            string updatedJson = JsonConvert.SerializeObject(flights, Formatting.Indented);
-            File.WriteAllText(flightFilePath, updatedJson);
+            _fileService.SaveToFile(flightFilePath, flights);
         }
 
     }

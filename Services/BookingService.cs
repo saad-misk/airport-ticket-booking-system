@@ -10,8 +10,14 @@ namespace AirportTicketBookingSystem.Services
 {
     public class BookingService
     {
+        private readonly FileService _fileService;
         private string bookingFilePath = $"{AppDomain.CurrentDomain.BaseDirectory}../../../Data/bookings.json";
         private string passengerFilePath = $"{AppDomain.CurrentDomain.BaseDirectory}../../../Data/passengers.json";
+
+        public BookingService()
+        {
+            _fileService = new FileService();
+        }
 
         public void BookFlight(string passengerId, string flightNumber, string flightClass)
         {
@@ -75,31 +81,18 @@ namespace AirportTicketBookingSystem.Services
 
         private void SaveBookings(List<Booking> bookingsList)
         {
-            string updatedJson = JsonConvert.SerializeObject(bookingsList, Formatting.Indented);
-
-            File.WriteAllText(bookingFilePath, updatedJson);
-
+            _fileService.SaveToFile<Booking>(bookingFilePath, bookingsList);
         }
         private void SaveBooking(Booking booking)
         {
             var bookings = LoadBookings();
             bookings.Add(booking);
-
-            string updatedJson = JsonConvert.SerializeObject(bookings, Formatting.Indented);
-
-            File.WriteAllText(bookingFilePath, updatedJson);
-
+            SaveBookings(bookings);
         }
 
         private List<Booking> LoadBookings()
         {
-            if (!File.Exists(bookingFilePath))
-            {
-                throw new FileNotFoundException($"File not found: {bookingFilePath}");
-            }
-            string json = File.ReadAllText(bookingFilePath);
-            return JsonConvert.DeserializeObject<List<Booking>>(json) ?? new List<Booking>();
-
+            return _fileService.LoadFromFile<Booking>(bookingFilePath);
         }
 
     }
