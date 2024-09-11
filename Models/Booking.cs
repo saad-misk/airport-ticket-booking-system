@@ -8,7 +8,7 @@ namespace AirportTicketBookingSystem.Models
 {
     public class Booking
     {
-        public string BookingId { get; set; }
+        public Guid BookingId { get; set; }
         public string FlightNumber { get; set; }
         public string PassengerId { get; set; }
         public string Class { get; set; }
@@ -16,7 +16,7 @@ namespace AirportTicketBookingSystem.Models
 
         public override string ToString()
         {
-            return $"Booking ID: {BookingId ?? "N/A"}, " +
+            return $"Booking ID: {BookingId.ToString() ?? "N/A"}, " +
                    $"Flight Number: {FlightNumber ?? "N/A"}, " +
                    $"Passenger ID: {PassengerId ?? "N/A"}, " +
                    $"Class: {Class ?? "N/A"}, " +

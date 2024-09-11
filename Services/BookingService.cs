@@ -23,7 +23,7 @@ namespace AirportTicketBookingSystem.Services
         {
             var booking = new Booking
             {
-                BookingId = Guid.NewGuid().ToString(),
+                BookingId = Guid.NewGuid(),
                 FlightNumber = flightNumber,
                 PassengerId = passengerId,
                 Class = flightClass,
@@ -36,10 +36,9 @@ namespace AirportTicketBookingSystem.Services
 
         public void CancelBooking(string bookingId)
         {
-
             List<Booking> bookings = LoadBookings();
 
-            int removedCount = bookings.RemoveAll(b => b.BookingId == bookingId);
+            int removedCount = bookings.RemoveAll(b => b.BookingId.ToString() == bookingId);
 
             if (removedCount == 0) 
             {
@@ -57,7 +56,7 @@ namespace AirportTicketBookingSystem.Services
         {
             var bookings = LoadBookings();
 
-            var bookingToModify = bookings.FirstOrDefault(b => b.BookingId == bookingId);
+            var bookingToModify = bookings.FirstOrDefault(b => b.BookingId.ToString() == bookingId);
 
             if(bookingToModify != null)
             {
