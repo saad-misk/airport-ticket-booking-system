@@ -1,20 +1,15 @@
 ﻿using AirportTicketBookingSystem.Helpers;
 using AirportTicketBookingSystem.Models;
 using AirportTicketBookingSystem.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AirportTicketBookingSystem.Views
+namespace AirportTicketBookingSystem.Commands
 {
-    public class BookFlightCommand : ICommand
+    public class ModifyBookingCommand : ICommand
     {
         private readonly BookingService _bookingService;
         private readonly FlightService _flightService;
 
-        public BookFlightCommand(BookingService bookingService, FlightService flightService)
+        public ModifyBookingCommand(BookingService bookingService, FlightService flightService)
         {
             _bookingService = bookingService;
             _flightService = flightService;
@@ -22,28 +17,26 @@ namespace AirportTicketBookingSystem.Views
         public void Execute()
         {
             var promptUser = new PromptUser();
-            Console.WriteLine("Enter Booking Information:");
+            Console.WriteLine("Enter Booking Information to modify:");
 
-            var passengerId = promptUser.PromptForString("Passenger ID: ") ?? "N/A";
-            var flightNumber = promptUser.PromptForString("Flight Number: ") ?? "N/A";
+            var bookingId = promptUser.PromptForString("Booking ID: ");
+            var flightNumber = promptUser.PromptForString("New Flight Number: ");
 
             var flightCriteria = new Flight
             {
-                FlightNumber = flightNumber
+                FlightNumber = flightNumber,
             };
             var availableFlights = _flightService.GetAvailableFlights(flightCriteria);
-            if( availableFlights.Any())
+            if (availableFlights.Any())
             {
                 var flightClass = availableFlights[0].ClassPrices.First().Key;
-                _bookingService.BookFlight(passengerId, flightNumber, flightClass);
-                Console.WriteLine("Done! Booking a flight");
+                _bookingService.ModifyBooking(bookingId, flightNumber, flightClass);
+                Console.WriteLine("Done! Booking was modified.");
             }
             else
             {
                 Console.WriteLine("There is no flight with that number, Enter an existing flight number");
             }
         }
-
-        
     }
 }

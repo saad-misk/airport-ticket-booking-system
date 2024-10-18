@@ -1,10 +1,5 @@
 ﻿using AirportTicketBookingSystem.Helpers;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AirportTicketBookingSystem.Models
 {
@@ -22,6 +17,9 @@ namespace AirportTicketBookingSystem.Models
 
         [Required(ErrorMessage = "Departure date is required.")]
         [DataType(DataType.Date, ErrorMessage = "Invalid date format.")]
+        //for static Range validation we could use Range()
+        //[Range(typeof(DateTime), "1/1/2024", "1/1/2026",
+        // ErrorMessage = "Value for {0} must be between {2025} and {2026}")]
         [DateRange(-30, 100, ErrorMessage = "Booking date must be between 1 day and 30 days from today.")]
         public DateTime? DepartureDate { get; set; }
 

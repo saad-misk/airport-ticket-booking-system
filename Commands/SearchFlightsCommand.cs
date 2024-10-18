@@ -1,13 +1,8 @@
 ﻿using AirportTicketBookingSystem.Helpers;
 using AirportTicketBookingSystem.Models;
 using AirportTicketBookingSystem.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AirportTicketBookingSystem.Views
+namespace AirportTicketBookingSystem.Commands
 {
     public class SearchFlightsCommand : ICommand
     {
@@ -22,9 +17,12 @@ namespace AirportTicketBookingSystem.Views
         {
             Flight flightCriteria = GetFlightInformationFromUser();
             var availableFlights = _flightService.GetAvailableFlights(flightCriteria);
-            foreach(var flight in availableFlights){
+            
+            foreach (var flight in availableFlights)
+            {
                 Console.WriteLine(flight.ToString());
             }
+
             if (availableFlights.Count == 0)
             {
                 Console.WriteLine("There are no matching flights.");
@@ -44,7 +42,6 @@ namespace AirportTicketBookingSystem.Views
             flight.DepartureAirport = promptUser.PromptForNullableString("Enter departure airport (or press Enter to skip): ");
             flight.ArrivalAirport = promptUser.PromptForNullableString("Enter arrival airport (or press Enter to skip): ");
             flight.ClassPrices = null;
-           
 
             return flight;
         }

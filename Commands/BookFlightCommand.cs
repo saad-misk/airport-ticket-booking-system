@@ -1,42 +1,37 @@
 ﻿using AirportTicketBookingSystem.Helpers;
 using AirportTicketBookingSystem.Models;
 using AirportTicketBookingSystem.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AirportTicketBookingSystem.Views
+namespace AirportTicketBookingSystem.Commands
 {
-    public class ModifyBookingCommand : ICommand
+    public class BookFlightCommand : ICommand
     {
         private readonly BookingService _bookingService;
         private readonly FlightService _flightService;
 
-        public ModifyBookingCommand(BookingService bookingService, FlightService flightService)
+        public BookFlightCommand(BookingService bookingService, FlightService flightService)
         {
             _bookingService = bookingService;
             _flightService = flightService;
         }
-        public void Execute() 
+        public void Execute()
         {
             var promptUser = new PromptUser();
-            Console.WriteLine("Enter Booking Information to modify:");
+            Console.WriteLine("Enter Booking Information:");
 
-            var bookingId = promptUser.PromptForString("Booking ID: ");
-            var flightNumber = promptUser.PromptForString("New Flight Number: ");
+            var passengerId = promptUser.PromptForString("Passenger ID: ") ?? "N/A";
+            var flightNumber = promptUser.PromptForString("Flight Number: ") ?? "N/A";
 
             var flightCriteria = new Flight
             {
-                FlightNumber = flightNumber,
+                FlightNumber = flightNumber
             };
             var availableFlights = _flightService.GetAvailableFlights(flightCriteria);
             if (availableFlights.Any())
             {
                 var flightClass = availableFlights[0].ClassPrices.First().Key;
-                _bookingService.ModifyBooking(bookingId, flightNumber, flightClass);
-                Console.WriteLine("Done! Booking was modified.");
+                _bookingService.BookFlight(passengerId, flightNumber, flightClass);
+                Console.WriteLine("Done! Booking a flight");
             }
             else
             {

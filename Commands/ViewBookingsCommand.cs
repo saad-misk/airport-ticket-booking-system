@@ -1,12 +1,7 @@
 ﻿using AirportTicketBookingSystem.Helpers;
 using AirportTicketBookingSystem.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AirportTicketBookingSystem.Views
+namespace AirportTicketBookingSystem.Commands
 {
     public class ViewBookingsCommand : ICommand
     {
@@ -22,11 +17,11 @@ namespace AirportTicketBookingSystem.Views
             PromptUser promptUser = new PromptUser();
             string passengerId = promptUser.PromptForString("Enter Passenger ID: ");
             var bookings = _bookingService.GetPersonalBookings(passengerId);
-            foreach(var booking in bookings)
+            foreach (var booking in bookings)
             {
                 Console.WriteLine(booking.ToString());
             }
-            if(bookings.Count == 0)
+            if (bookings.Count == 0)
             {
                 Console.WriteLine($"There are no bookings for passenger with id: {passengerId}");
             }

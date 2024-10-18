@@ -1,10 +1,5 @@
 ﻿using AirportTicketBookingSystem.Models;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AirportTicketBookingSystem.Helpers
 {
@@ -24,7 +19,6 @@ namespace AirportTicketBookingSystem.Helpers
                 {
                     foreach (var validationResult in validationResults)
                     {
-
                         errors.Add($"Flight({cnt}) {flight.FlightNumber}: {validationResult.ErrorMessage}");
                     }
                 }

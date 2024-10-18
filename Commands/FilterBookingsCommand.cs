@@ -1,12 +1,7 @@
 ﻿using AirportTicketBookingSystem.Helpers;
 using AirportTicketBookingSystem.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AirportTicketBookingSystem.Views
+namespace AirportTicketBookingSystem.Commands
 {
     public class FilterBookingsCommand : ICommand
     {
@@ -24,6 +19,7 @@ namespace AirportTicketBookingSystem.Views
 
             Console.WriteLine("Filtered Bookings:");
             Console.WriteLine(filteredBookings.Count());
+
             foreach (var booking in filteredBookings)
             {
                 Console.WriteLine($"Booking ID: {booking.BookingId}, Flight Number: {booking.FlightNumber}, " +
@@ -49,6 +45,5 @@ namespace AirportTicketBookingSystem.Views
 
             return criteria;
         }
-
     }
 }
