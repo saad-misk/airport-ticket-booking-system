@@ -1,0 +1,145 @@
+[
+  {
+    "FlightNumber": "AA123",
+    "DepartureCountry": "USA",
+    "DestinationCountry": "UK",
+    "DepartureDate": "2024-10-15T10:00:00Z",
+    "DepartureAirport": "JFK",
+    "ArrivalAirport": "LHR",
+    "ClassPrices": {
+      "Economy": 500.00,
+      "Business": 1500.00,
+      "FirstClass": 3000.00
+    }
+  },
+  {
+    "FlightNumber": "BA456",
+    "DepartureCountry": "UK",
+    "DestinationCountry": "Canada",
+    "DepartureDate": "2024-11-01T14:00:00Z",
+    "DepartureAirport": "LHR",
+    "ArrivalAirport": "YYZ",
+    "ClassPrices": {
+      "Economy": 450.00,
+      "Business": 1300.00,
+      "FirstClass": 2800.00
+    }
+  },
+  {
+    "FlightNumber": "DL789",
+    "DepartureCountry": "USA",
+    "DestinationCountry": "France",
+    "DepartureDate": "2024-12-10T08:00:00Z",
+    "DepartureAirport": "ATL",
+    "ArrivalAirport": "CDG",
+    "ClassPrices": {
+      "Economy": 600.00,
+      "Business": 1700.00,
+      "FirstClass": 3200.00
+    }
+  },
+  {
+    "FlightNumber": "AF101",
+    "DepartureCountry": "France",
+    "DestinationCountry": "Japan",
+    "DepartureDate": "2024-09-20T12:00:00Z",
+    "DepartureAirport": "CDG",
+    "ArrivalAirport": "NRT",
+    "ClassPrices": {
+      "Economy": 700.00,
+      "Business": 2000.00,
+      "FirstClass": 3500.00
+    }
+  },
+  {
+    "FlightNumber": "QF202",
+    "DepartureCountry": "Australia",
+    "DestinationCountry": "USA",
+    "DepartureDate": "2024-10-25T18:00:00Z",
+    "DepartureAirport": "SYD",
+    "ArrivalAirport": "LAX",
+    "ClassPrices": {
+      "Economy": 900.00,
+      "Business": 2500.00,
+      "FirstClass": 4000.00
+    }
+  },
+  {
+    "FlightNumber": "LH303",
+    "DepartureCountry": "Germany",
+    "DestinationCountry": "Brazil",
+    "DepartureDate": "2024-11-15T16:00:00Z",
+    "DepartureAirport": "FRA",
+    "ArrivalAirport": "GRU",
+    "ClassPrices": {
+      "Economy": 650.00,
+      "Business": 1800.00,
+      "FirstClass": 3200.00
+    }
+  },
+  {
+    "FlightNumber": "EK404",
+    "DepartureCountry": "UAE",
+    "DestinationCountry": "India",
+    "DepartureDate": "2024-12-05T22:00:00Z",
+    "DepartureAirport": "DXB",
+    "ArrivalAirport": "DEL",
+    "ClassPrices": {
+      "Economy": 350.00,
+      "Business": 1200.00,
+      "FirstClass": 2500.00
+    }
+  },
+  {
+    "FlightNumber": "43232",
+    "DepartureCountry": "Japan",
+    "DestinationCountry": "South Korea",
+    "DepartureDate": "2024-12-05T22:00:00Z",
+    "DepartureAirport": "NRT",
+    "ArrivalAirport": "ICN",
+    "ClassPrices": {
+      "Economy": 300.00,
+      "Business": 900.00,
+      "FirstClass": 1800.00
+    }
+  },
+  {
+    "FlightNumber": "AS606",
+    "DepartureCountry": "USA",
+    "DestinationCountry": "Hawaii",
+    "DepartureDate": "2024-10-30T07:00:00Z",
+    "DepartureAirport": "SEA",
+    "ArrivalAirport": "HNL",
+    "ClassPrices": {
+      "Economy": 400.00,
+      "Business": 1200.00,
+      "FirstClass": 2500.00
+    }
+  },
+  {
+    "FlightNumber": "IB707",
+    "DepartureCountry": "Spain",
+    "DestinationCountry": "Italy",
+    "DepartureDate": "2024-11-22T15:00:00Z",
+    "DepartureAirport": "MAD",
+    "ArrivalAirport": "FCO",
+    "ClassPrices": {
+      "Economy": 250.00,
+      "Business": 800.00,
+      "FirstClass": 1500.00
+    }
+  },
+  {
+    "FlightNumber": "CA808",
+    "DepartureCountry": "China",
+    "DestinationCountry": "Australia",
+    "DepartureDate": "2024-12-01T20:00:00Z",
+    "DepartureAirport": "PEK",
+    "ArrivalAirport": "SYD",
+    "ClassPrices": {
+      "Economy": 850.00,
+      "Business": 2300.00,
+      "FirstClass": 3700.00
+    }
+  }
+]
