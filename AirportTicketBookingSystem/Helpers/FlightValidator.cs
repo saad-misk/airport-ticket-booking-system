@@ -5,7 +5,7 @@ namespace AirportTicketBookingSystem.Helpers
 {
     public class FlightValidator
     {
-        public List<string> ValidateFlight(List<Flight> flights)
+        public virtual List<string> ValidateFlight(List<Flight> flights)
         {
             var errors = new List<string>();
             int cnt = 0;

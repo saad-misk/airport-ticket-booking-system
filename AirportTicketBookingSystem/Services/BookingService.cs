@@ -5,12 +5,17 @@ namespace AirportTicketBookingSystem.Services
     public class BookingService
     {
         private readonly FileService _fileService;
-        private string bookingFilePath = $"{AppDomain.CurrentDomain.BaseDirectory}../../../Data/bookings.json";
-        private string passengerFilePath = $"{AppDomain.CurrentDomain.BaseDirectory}../../../Data/passengers.json";
+        private string bookingFilePath = $"{AppDomain.CurrentDomain.BaseDirectory}../../../../AirportTicketBookingSystem/Data/bookings.json";
+        private string passengerFilePath = $"{AppDomain.CurrentDomain.BaseDirectory}../../../../AirportTicketBookingSystem/Data/passengers.json";
 
         public BookingService()
         {
             _fileService = new FileService();
+        }
+
+        public BookingService(FileService fileService)
+        {
+            _fileService = fileService;
         }
 
         public void BookFlight(string passengerId, string flightNumber, string flightClass)

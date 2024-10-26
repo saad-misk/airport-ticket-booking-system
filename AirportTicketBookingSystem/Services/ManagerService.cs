@@ -7,12 +7,16 @@ namespace AirportTicketBookingSystem.Services
     public class ManagerService
     {
         private readonly FileService _fileService;
-        private string flightFilePath = $"{AppDomain.CurrentDomain.BaseDirectory}../../../Data/flights.json";
-        private string bookingFilePath = $"{AppDomain.CurrentDomain.BaseDirectory}../../../Data/bookings.json";
+        private string flightFilePath = $"{AppDomain.CurrentDomain.BaseDirectory}../../../../AirportTicketBookingSystem/Data/flights.json";
+        private string bookingFilePath = $"{AppDomain.CurrentDomain.BaseDirectory}../../../../AirportTicketBookingSystem/Data/bookings.json";
 
         public ManagerService()
         {
             _fileService = new FileService();
+        }
+        public ManagerService(FileService fileService)
+        {
+            _fileService = fileService;
         }
         public List<Booking> FilterBookings(FilterCriteria criteria)
         {
@@ -21,7 +25,7 @@ namespace AirportTicketBookingSystem.Services
             return bookings.Where(b =>
             {
                 var flight = GetFlight(b.FlightNumber);
-                var flightPrice = flight != null ? GetFlightPrice(b.FlightNumber, b.Class) : (decimal?)null;                
+                var flightPrice = flight != null ? GetFlightPrice(b.FlightNumber, b.Class) : (decimal?)null;
                 return
                     (criteria.FlightNumber == null || b.FlightNumber == criteria.FlightNumber) &&
                     (criteria.Price == null || flightPrice == criteria.Price) &&
@@ -48,11 +52,11 @@ namespace AirportTicketBookingSystem.Services
         public void ValidateReport()
         {
             var txt = Validate();
-            foreach(var t in txt)
+            foreach (var t in txt)
             {
                 Console.WriteLine(t);
             }
-            if(txt.Count == 0)
+            if (txt.Count == 0)
             {
                 Console.WriteLine("All Flights are valid");
             }
@@ -85,8 +89,13 @@ namespace AirportTicketBookingSystem.Services
         public decimal GetFlightPrice(string flightNumber, string flightClass)
         {
             var flight = GetFlight(flightNumber);
-            return flight.ClassPrices.ContainsKey(flightClass) ? flight.ClassPrices[flightClass] : 0;
+            if (flight.ClassPrices == null || !flight.ClassPrices.ContainsKey(flightClass))
+            {
+                return 0;
+            }
+            return flight.ClassPrices[flightClass];
         }
+
     }
 
 

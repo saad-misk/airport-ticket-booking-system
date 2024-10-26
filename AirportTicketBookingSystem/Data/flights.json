@@ -141,5 +141,41 @@
       "Business": 2300.00,
       "FirstClass": 3700.00
     }
+  },
+  {
+    "FlightNumber": "FL003",
+    "DepartureCountry": "Germany",
+    "DestinationCountry": "France",
+    "DepartureDate": null,
+    "DepartureAirport": null,
+    "ArrivalAirport": null,
+    "ClassPrices": null
+  },
+  {
+    "FlightNumber": "FL003",
+    "DepartureCountry": "Germany",
+    "DestinationCountry": "France",
+    "DepartureDate": null,
+    "DepartureAirport": null,
+    "ArrivalAirport": null,
+    "ClassPrices": null
+  },
+  {
+    "FlightNumber": "FL003",
+    "DepartureCountry": "Germany",
+    "DestinationCountry": "France",
+    "DepartureDate": null,
+    "DepartureAirport": null,
+    "ArrivalAirport": null,
+    "ClassPrices": null
+  },
+  {
+    "FlightNumber": "FL003",
+    "DepartureCountry": "Germany",
+    "DestinationCountry": "France",
+    "DepartureDate": null,
+    "DepartureAirport": null,
+    "ArrivalAirport": null,
+    "ClassPrices": null
   }
 ]

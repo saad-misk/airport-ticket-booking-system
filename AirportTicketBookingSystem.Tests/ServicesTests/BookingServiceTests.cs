@@ -15,8 +15,10 @@ namespace AirportTicketBookingSystem.Tests
 
         public BookingServiceTests()
         {
+            // Create the mock for FileService
             _mockFileService = new Mock<FileService>();
-            _bookingService = new BookingService();
+            // Initialize BookingService with the mocked FileService
+            _bookingService = new BookingService(_mockFileService.Object);
         }
 
         [Fact]
@@ -27,13 +29,22 @@ namespace AirportTicketBookingSystem.Tests
             var flightNumber = "FL123";
             var flightClass = "Economy";
 
+            // Simulate loading an empty booking list
+            _mockFileService.Setup(fs => fs.LoadFromFile<Booking>(It.IsAny<string>()))
+                .Returns(new List<Booking>());
+
             // Act
             _bookingService.BookFlight(passengerId, flightNumber, flightClass);
 
             // Assert
             _mockFileService.Verify(fs => fs.SaveToFile<Booking>(
                 It.IsAny<string>(),
-                It.Is<List<Booking>>(bookings => bookings.Count == 1 && bookings[0].PassengerId == passengerId)
+                It.Is<List<Booking>>(bookings =>
+                    bookings.Count == 1 &&
+                    bookings[0].PassengerId == passengerId &&
+                    bookings[0].FlightNumber == flightNumber &&
+                    bookings[0].Class == flightClass
+                )
             ), Times.Once);
         }
 
@@ -84,7 +95,10 @@ namespace AirportTicketBookingSystem.Tests
             Assert.Equal(newClass, bookings.First().Class);
             _mockFileService.Verify(fs => fs.SaveToFile<Booking>(
                 It.IsAny<string>(),
-                It.Is<List<Booking>>(b => b.First().FlightNumber == newFlightNumber && b.First().Class == newClass)
+                It.Is<List<Booking>>(b =>
+                    b.First().FlightNumber == newFlightNumber &&
+                    b.First().Class == newClass
+                )
             ), Times.Once);
         }
 
